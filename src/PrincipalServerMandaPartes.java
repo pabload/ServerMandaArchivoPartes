@@ -66,32 +66,22 @@ public class PrincipalServerMandaPartes {
                     try {
                      System.out.println("existe");
                      System.out.println(archivo.getAbsolutePath()+"aaaaaaaa");
-                    /*System.out.println(entrada);
                     int longitud = (int) new File(entrada).length();
                     escritor.println(longitud);
-                    byte[] mybytearray = new byte[(int) archivo.length()];
                     fis = new FileInputStream(archivo);
                     bis = new BufferedInputStream(fis);
-                    bis.read(mybytearray, 0, mybytearray.length);
-                    os = socket.getOutputStream();
-                    System.out.println("enviando " + entrada + "(" + mybytearray.length + " bytes)");
-                    os.write(mybytearray, 0, mybytearray.length);
-                    os.flush();
-                    System.out.println("ya.");*/
-                    int longitud = (int) new File(entrada).length();
-                    escritor.println(longitud);
-                    //byte[] mybytearray = new byte[(int) archivo.length()];
-                    fis = new FileInputStream(archivo);
-                    bis = new BufferedInputStream(fis);
-                    //bis.read(mybytearray, 0, mybytearray.length);
                     os = socket.getOutputStream();
                         int count;
-                        byte[] buffer = new byte[100];
+                        int barra=0;
+                        byte[] buffer = new byte[longitud/9];
                         while ((count = bis.read(buffer)) > 0) {
                             os.write(buffer, 0, count);
-                            
-                            System.out.print("|");
+                             System.out.print(count);
+                            System.out.print("-");
+                            barra++;
                         }
+                        System.out.println("enviado:"+barra*10+" Porciento");
+                        os.close();
                         os.flush();
                         System.out.println("se mando");
                     } catch (IOException ex) {
