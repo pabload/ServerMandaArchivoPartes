@@ -72,15 +72,20 @@ public class PrincipalServerMandaPartes {
                     bis = new BufferedInputStream(fis);
                     os = socket.getOutputStream();
                         int count;
-                        int barra=0;
+                        int barra=1;
                         byte[] buffer = new byte[longitud/9];
+                         char[] animationChars = new char[]{'|', '/', '-', '\\'};
                         while ((count = bis.read(buffer)) > 0) {
+                            
                             os.write(buffer, 0, count);
-                             System.out.print(count);
-                            System.out.print("-");
+                             //System.out.print(count);
+                            //System.out.print("-");
+                              System.out.print("Processing: " + barra*10 + "% "+ "\r");
                             barra++;
+                            //System.out.print(String.format(format, barra));
+                            //System.out.print("\r"+count);
                         }
-                        System.out.println("enviado:"+barra*10+" Porciento");
+                       // System.out.println("enviado:"+barra*10+" Porciento");
                         os.close();
                         os.flush();
                         System.out.println("se mando");
