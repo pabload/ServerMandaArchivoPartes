@@ -66,29 +66,41 @@ public class PrincipalServerMandaPartes {
                     try {
                      System.out.println("existe");
                      System.out.println(archivo.getAbsolutePath()+"aaaaaaaa");
-                    int longitud = (int) new File(entrada).length();
+                    long longitud = (long) new File(entrada).length();
                     escritor.println(longitud);
                     fis = new FileInputStream(archivo);
                     bis = new BufferedInputStream(fis);
                     os = socket.getOutputStream();
-                        int count;
-                        int barra=1;
-                        byte[] buffer = new byte[longitud/9];
+                    long count;
+                   long c=0;
+                   byte[] buffer = null;
+                        if (longitud>100000000) {
+                             System.out.println("entro al primerbuffer");
+                           buffer = new byte[100000000];
+                        }else{
+                            if (longitud<=100000000) {
+                                System.out.println("entro al segundobuffer");
+                                buffer = new byte[(int)longitud/10];
+                            }
+                        
+                        }
+                       
+                        System.out.println("saadadadasd"+buffer.length);
                          char[] animationChars = new char[]{'|', '/', '-', '\\'};
                         while ((count = bis.read(buffer)) > 0) {
-                            
-                            os.write(buffer, 0, count);
+                             c=c+count;
+                            os.write(buffer, 0, (int) count);
                              //System.out.print(count);
                             //System.out.print("-");
-                              System.out.print("Processing: " + barra*10 + "% "+ "\r");
-                            barra++;
+                              System.out.print("Se mando: " + c +" de "+longitud +" \r");
+                           
                             //System.out.print(String.format(format, barra));
                             //System.out.print("\r"+count);
                         }
                        // System.out.println("enviado:"+barra*10+" Porciento");
                         os.close();
                         os.flush();
-                        System.out.println("se mando");
+                        //System.out.println("se mando");
                     } catch (IOException ex) {
                       System.out.println("Error al mandar archivo"+ex);
                     }
