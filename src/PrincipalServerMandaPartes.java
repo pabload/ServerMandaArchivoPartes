@@ -78,15 +78,18 @@ public class PrincipalServerMandaPartes {
                              System.out.println("entro al primerbuffer");
                            buffer = new byte[100000000];
                         }else{
+                            if (longitud<10) {
+                                 buffer = new byte[(int)longitud];
+                            }else{
                             if (longitud<=100000000) {
                                 System.out.println("entro al segundobuffer");
                                 buffer = new byte[(int)longitud/10];
                             }
+                         }   
                         
                         }
                        
                         System.out.println("saadadadasd"+buffer.length);
-                         char[] animationChars = new char[]{'|', '/', '-', '\\'};
                         while ((count = bis.read(buffer)) > 0) {
                              c=c+count;
                             os.write(buffer, 0, (int) count);
